@@ -1,0 +1,12 @@
+.table_container{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.table_head{
+    background-color: black;
+
+}
+.table_head_item{
+    color: white;
+}

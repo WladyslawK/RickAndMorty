@@ -1,0 +1,51 @@
+:root {
+    --main-bg-color: white;
+    --border-radius: 5px
+}
+
+.searchContainer{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.input > input {
+    z-index: 1;
+
+    height: 19px;
+    padding: 9px 9px 9px 35px;
+    background: url('./../../assets/icons/search.svg');
+}
+
+.nameInput{
+    background-color: var(--main-bg-color);
+    min-width: 350px;
+    border-radius: var(--border-radius);
+}
+
+.statusInput{
+    background-color: var(--main-bg-color);
+    min-width: 120px;
+    border-radius: var(--border-radius);
+}
+
+.speciesInput{
+    background-color: var(--main-bg-color);
+    min-width: 180px;
+    border-radius: var(--border-radius);
+}
+
+.resetAllFilters{
+    width: 40px;
+    height: 38px;
+    border: 1px solid grey;
+    background-color: var(--main-bg-color);
+    border-radius: var(--border-radius);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.resetAllFilters:hover{
+    border-color: black;
+}
