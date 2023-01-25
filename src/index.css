@@ -6,7 +6,8 @@ html{
   background-position: top;
   filter: saturate(100%);
   background-repeat: no-repeat;
-  overflow: clip;
+  background-attachment: fixed;
+  overflow: scroll;
 }
 
 body {
