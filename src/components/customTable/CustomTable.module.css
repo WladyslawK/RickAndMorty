@@ -10,3 +10,12 @@
 .table_head_item{
     color: white;
 }
+
+.img{
+    width: 40px;
+    height: 40px;
+}
+
+s.characterUrl{
+    cursor: pointer;
+}
