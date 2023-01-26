@@ -8,6 +8,9 @@
     display: flex;
     justify-content: center;
     background-color: black;
+    top: 0;
+    position: fixed;
+    z-index: 1;
 }
 
 .menuContainer {
@@ -23,12 +26,14 @@
 .logo {
     margin-right: 8px;
     color: var(--green);
+    cursor: pointer;
 }
 .logo_img{
     width: 40px;
     height: 40px;
     border-radius: 20px;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .navMenu {
@@ -87,7 +92,7 @@ a:hover{
         left: 0;
         opacity: 1;
         transition: all 0.5s ease;
-        z-index: 1;
+        z-index: 4;
     }
 
     .navItem {

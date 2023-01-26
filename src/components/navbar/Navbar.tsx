@@ -3,11 +3,13 @@ import s from './Navbar.module.css'
 import menuIcon from '../../assets/icons/burger-bar.png'
 import closeIcon from '../../assets/icons/close.png'
 import logo from '../../assets/images/logo.jpg'
-import {menuItems} from "../../data/constants";
+import {Link, useNavigate} from "react-router-dom";
+import {PATH} from "../../constants/routePaths.enum";
 
 export const Navbar = () => {
   const [click, setClick] = useState(false);
   const [iconMenu, setIconMenu] = useState(true);
+  const navigate = useNavigate()
 
   const handleClick = () => {
     setClick(!click);
@@ -20,7 +22,7 @@ export const Navbar = () => {
     } else {
       setIconMenu(true);
     }
-  };
+  }
 
   useEffect(() => {
     window.addEventListener('resize', showButton);
@@ -28,30 +30,21 @@ export const Navbar = () => {
   }, []);
 
 
+  const toMainPageHandler = () => navigate(PATH.ALL_CHARACTERS)
+
 
   const menuImage = <img onClick={handleClick} className={s.menuIcon} src={click ? closeIcon : menuIcon} alt="menu"/>
 
-  const menu = menuItems.map((item, i) => <li key={i} className={s.navItem}><a href="#">{item}</a></li>)
 
   return (
     <header className={s.header}>
       <div className={s.headerContainer}>
         <div className={s.menuContainer}>
-          <img src={logo} alt="logo" className={s.logo_img}/>
-          <h2 className={s.logo}>Rick & Morris</h2>
+          <img onClick={toMainPageHandler} src={logo} alt="logo" className={s.logo_img}/>
+          <h2 className={s.logo} onClick={toMainPageHandler}>Rick & Morris</h2>
           <nav>
             <ul className={click ? `${s.navMenu} ${s.navMenuActive}` : s.navMenu}>
-              {
-                menu
-              }
-              {click ?
-                <>
-                  <li className={s.navItem}><a href="#">Log in</a></li>
-                  <li className={s.navItem}><a href="#">Get Started</a></li>
-                </>
-                : ''
-
-              }
+              <li onClick={closeMobileMenu} className={s.navItem}><Link to={PATH.ALL_CHARACTERS}>All characters</Link></li>
             </ul>
           </nav>
 
