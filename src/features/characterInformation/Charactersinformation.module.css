@@ -1,0 +1,46 @@
+.mainContainer{
+    width: 50%;
+    margin: 120px auto 0 auto;
+    background-color: white;
+    opacity: 1;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.characterMainBlock{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.imgBlock{
+    width: 100%;
+}
+
+.characterImage{
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+}
+
+.showDetailsBtn{
+    margin-bottom: 20px;
+}
+
+.detailsContainer{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+}
+.leftDetails{
+    margin-left: 20px;
+}
+
+.rightDetails{
+    margin-right: 20px;
+}
