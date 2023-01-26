@@ -3,6 +3,12 @@
     --border-radius: 5px
 }
 
+.mainContainer{
+    display: flex;
+    margin: 0px auto 20px auto;
+    width: 80%;
+}
+
 .searchContainer{
     width: 100%;
     display: flex;
@@ -10,29 +16,21 @@
 
 }
 
-.input > input {
-    z-index: 1;
-
-    height: 19px;
-    padding: 9px 9px 9px 35px;
-    background: url('./../../assets/icons/search.svg');
-}
-
 .nameInput{
     background-color: var(--main-bg-color);
-    min-width: 350px;
+    width: 350px;
     border-radius: var(--border-radius);
 }
 
 .statusInput{
     background-color: var(--main-bg-color);
-    min-width: 120px;
+    width: 120px;
     border-radius: var(--border-radius);
 }
 
 .speciesInput{
     background-color: var(--main-bg-color);
-    min-width: 180px;
+    width: 180px;
     border-radius: var(--border-radius);
 }
 
