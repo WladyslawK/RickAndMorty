@@ -1,9 +1,10 @@
 import axios from "axios";
 import {queryParamsType} from "../features/allCharactersPage/charactersSlice";
+import {instance} from "./instance";
 
 export const charactersApi = {
   getCharacters: (data: updateQueryType) => {
-    return axios.get<CharactersResponseType>(`https://rickandmortyapi.com/api/character/`, {params: data})
+    return instance.get<CharactersResponseType>('', {params: data})
   }
 }
 

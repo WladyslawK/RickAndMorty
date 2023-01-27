@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 const initialState: AppInitialState = {
-  status: 'idle',
+  status: 'loading',
   error: ''
 }
 
@@ -10,7 +10,7 @@ const slice =createSlice({
   name: 'app',
   initialState,
   reducers: {
-    setInitializeAC: (state, action: PayloadAction<{status: AppStatusType}>) => {
+    setAppStatusAC: (state, action: PayloadAction<{status: AppStatusType}>) => {
       state.status = action.payload.status
     }
 
@@ -20,7 +20,7 @@ const slice =createSlice({
 
 export const appSlice = slice.reducer
 
-export const  {setInitializeAC} = slice.actions
+export const  {setAppStatusAC} = slice.actions
 
 type AppInitialState = {
   status: AppStatusType

@@ -1,9 +1,9 @@
 import {AnyAction, createSlice, Dispatch, PayloadAction, ThunkDispatch} from "@reduxjs/toolkit";
 import {CharacterDomainType, charactersApi, updateQueryType} from "../../api/characters-api";
-import {AppDispatchType, RootStateType} from "../../app/store";
-import {setInitializeAC} from "../../app/appSlice";
+import {RootStateType} from "../../app/store";
+import {setAppStatusAC} from "../../app/appSlice";
 
-export const initialCharactersState: CharactersInitialState = {
+export const initialCharactersState: CharactersInitialStateType = {
   characters: [],
   queryParams: {
     page: '1',
@@ -18,11 +18,11 @@ const slice = createSlice({
   name: 'characters',
   initialState: initialCharactersState,
   reducers: {
-    setCharactersAC: (state, action: PayloadAction<{ characters: CharactersType[], pages: string }>) => {
+    setCharactersAC: (state, action: PayloadAction<{ characters: CharacterDomainType[], pages: string }>) => {
       state.characters = action.payload.characters
       state.pages = action.payload.pages
     },
-    setCurrentPageAC: (state, action: PayloadAction<{queryParams: queryParamsType}>) => {
+    setQueryParamsAC: (state, action: PayloadAction<{queryParams: queryParamsType}>) => {
       state.queryParams = action.payload.queryParams
     }
   }
@@ -31,36 +31,34 @@ const slice = createSlice({
 
 export const charactersSlice = slice.reducer
 
-export const {setCharactersAC, setCurrentPageAC} = slice.actions
+export const {setCharactersAC, setQueryParamsAC} = slice.actions
 
 
 //characters thunks
 
 export const getCharacters = () => async (dispatch: Dispatch, getState:() => RootStateType ) => {
-  dispatch(setInitializeAC({status: 'loading'}))
+  dispatch(setAppStatusAC({status: 'loading'}))
   try {
     const data = getState().allCharacters.queryParams;
     const response = await charactersApi.getCharacters(data)
-    if (response.data.results.length) {
+
       const characters = response.data.results
       const pages = response.data.info.pages
       dispatch(setCharactersAC({characters, pages}))
-      dispatch(setInitializeAC({status: 'idle'}))
-    }
+      dispatch(setAppStatusAC({status: 'idle'}))
   } catch (error) {
   }
 }
 
 export const updateQueryParams = (data: updateQueryType) => async (dispatch: ThunkDispatch<RootStateType, any, AnyAction>, getState:() => RootStateType) => {
 
-  dispatch(setInitializeAC({status: 'loading'}))
+  dispatch(setAppStatusAC({status: 'loading'}))
   const queryParams = getState().allCharacters.queryParams
   const updateParams = {...queryParams, ...data}
 
-  dispatch(setCurrentPageAC({queryParams: updateParams}))
+  dispatch(setQueryParamsAC({queryParams: updateParams}))
   try {
     const response = await dispatch(getCharacters())
-    dispatch(setInitializeAC({status: 'idle'}))
   }catch (e){
     console.log(e)
   }
@@ -68,8 +66,8 @@ export const updateQueryParams = (data: updateQueryType) => async (dispatch: Thu
 }
 
 
-type CharactersInitialState = {
-  characters: CharactersType[]
+type CharactersInitialStateType = {
+  characters: CharacterDomainType[]
   queryParams: queryParamsType
   pages: string
 }
@@ -80,6 +78,4 @@ export type queryParamsType = {
   status: string
   species: string
 }
-
-export type CharactersType = Omit<CharacterDomainType, 'location' | 'episode'>
 
