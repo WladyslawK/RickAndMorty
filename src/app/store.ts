@@ -3,10 +3,12 @@ import { combineReducers } from 'redux'
 
 import { appSlice } from './appSlice'
 import {charactersSlice} from "../features/allCharactersPage/charactersSlice";
+import {characterSlice} from "../features/characterInformation/characterSlice";
 
 const rootReducer = combineReducers({
   app: appSlice,
-  allCharacters: charactersSlice
+  allCharacters: charactersSlice,
+  characterInfo: characterSlice
 })
 
 export const store = configureStore({
