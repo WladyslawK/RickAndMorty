@@ -1,0 +1,32 @@
+.mainContainer{
+    width: 50%;
+    min-height: 300px;
+    margin: 120px auto 0 auto;
+    background-color: white;
+    opacity: 1;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.characterMainBlock{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: -10px;
+}
+
+.imgBlock{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.buttonBlock{
+    margin-top: 5px;
+}
