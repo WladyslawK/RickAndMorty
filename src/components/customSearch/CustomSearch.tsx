@@ -1,4 +1,4 @@
-import React, {ChangeEvent, createRef, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   FormControl,
   IconButton,
@@ -6,38 +6,111 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
-  SelectChangeEvent,
-  TextField
+  SelectChangeEvent
 } from "@mui/material";
 import s from './CustomSerch.module.css'
 import {FilterAltOff, Search} from "@mui/icons-material";
-import {speciesFilter, status} from "../../constants/constants";
+import {speciesFilter, statusFilter} from "../../constants/constants";
 import {useAppDispatch} from "../../hooks/reduxHooks";
-import {initialCharactersState, updateQueryParams} from "../../features/allCharactersPage/charactersSlice";
+import {
+  getCharacters,
+  initialCharactersState,
+  updateQueryParams
+} from "../../features/allCharactersPage/charactersSlice";
+import {useSearchParams} from "react-router-dom";
 
 export const CustomSearch = () => {
 
+  let [searchParams, setSearchParams] = useSearchParams();
+  const queryStatus = searchParams.get('status')
+  const querySpecies = searchParams.get('species')
+  const queryName = searchParams.get('name')
+
   const dispatch = useAppDispatch()
-  const [queryName, setQueryName] = useState('')
-  const [queryStatus, setQueryStatus] = useState('')
-  const [querySpecies, setQuerySpecies] = useState('')
+  const inputRef: any = useRef(queryName ? queryName : '')
+  const [name, setName] = useState(queryName ? queryName : '')
+  const [status, setStatus] = useState(queryStatus ? queryStatus : '')
+  const [species, setSpecies] = useState(querySpecies ? querySpecies : '')
+
+
+
+  useEffect(() => {
+
+    if(name || status || species){
+      const queryUpdate = {
+        name: name ? name : '',
+        status: status ? status : '',
+        species: species ? species : ''
+      }
+      //dispatch(updateQueryParams(queryParams))
+      dispatch(updateQueryParams(queryUpdate))
+    }else{
+      dispatch(getCharacters())
+    }
+
+  }, [])
+
+
+  useEffect(() => {
+
+    if (status) {
+      searchParams.set('status', status)
+      setSearchParams(searchParams)
+    } else {
+      searchParams.delete('status')
+      setSearchParams(searchParams)
+    }
+
+
+  }, [status])
+
+  useEffect(() => {
+
+    if (species) {
+      searchParams.set('species', species)
+      setSearchParams(searchParams)
+    } else {
+      searchParams.delete('species')
+      setSearchParams(searchParams)
+    }
+  }, [species])
+
+
+  useEffect(() => {
+
+    if (name) {
+      searchParams.set('name', name)
+      setSearchParams(searchParams)
+    } else {
+      searchParams.delete('name')
+      setSearchParams(searchParams)
+    }
+
+    //try
+
+
+
+  }, [name])
+
+
+  console.log('SEARCHPARAMS: ', searchParams)
+
 
   const changeStatusHandler = (event: SelectChangeEvent<string>) => {
     const status = event.target.value
-    setQueryStatus(status)
+    setStatus(status)
     dispatch(updateQueryParams({page: '1', status}))
   }
 
   const changeSpeciesHandler = (event: SelectChangeEvent<string>) => {
     const species = event.target.value
-    setQuerySpecies(species)
+    setSpecies(species)
     dispatch(updateQueryParams({page: '1', species}))
   }
 
-
-  const inputRef: any = useRef(null)
   const onChangeNameHandler = (name: string) => {
 
+    setName(name)
     console.log('hello from debounce1: ', name[0])
     //setQueryName(name)
     dispatch(updateQueryParams({page: '1', name}))
@@ -55,16 +128,21 @@ export const CustomSearch = () => {
     }
   }
 
-  console.log("STATUS: ", queryStatus)
+  const debouncedChange = debounce(onChangeNameHandler, 600)
+
+  console.log("STATUS: ", status)
 
   const resetAllFiltersHandler = () => {
     dispatch(updateQueryParams({...initialCharactersState.queryParams}))
-    inputRef.current = ''
-    setQueryStatus('')
-    setQuerySpecies('')
+    console.log('REF value before: ', inputRef)
+    inputRef.current.value = ''
+    console.log('REF value after: ', inputRef.current.value)
+    setName('')
+    setStatus('')
+    setSpecies('')
   }
 
-  const debouncedChange = debounce(onChangeNameHandler, 1000)
+
 
   return (
     <div className={s.mainContainer}>
@@ -90,7 +168,7 @@ export const CustomSearch = () => {
         </FormControl>
 
         <FormControl>
-          <InputLabel id="demo-simple-select-label" >Status</InputLabel>
+          <InputLabel id="demo-simple-select-label">Status</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
@@ -98,10 +176,10 @@ export const CustomSearch = () => {
             label="status"
             className={s.statusInput}
             onChange={changeStatusHandler}
-            value={queryStatus}
+            value={status}
             size='small'
           >
-            {status.map((option, i) => (
+            {statusFilter.map((option, i) => (
               <MenuItem key={i} value={option}>
                 {option}
               </MenuItem>
@@ -110,7 +188,7 @@ export const CustomSearch = () => {
         </FormControl>
 
         <FormControl>
-          <InputLabel id="demo-simple-select-label" >Species</InputLabel>
+          <InputLabel id="demo-simple-select-label">Species</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
@@ -118,7 +196,7 @@ export const CustomSearch = () => {
             label="species"
             className={s.speciesInput}
             onChange={changeSpeciesHandler}
-            value={querySpecies}
+            value={species}
             size='small'
           >
             {speciesFilter.map((option, i) => (

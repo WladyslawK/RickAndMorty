@@ -7,21 +7,21 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import s from './CustomTable.module.css'
-import {CharactersType} from "../../features/allCharactersPage/charactersSlice";
 import {useAppSelector} from "../../hooks/reduxHooks";
 import {AppStatusType} from "../../app/appSlice";
 import {TableBodySkeleton} from "../tableBodySkeleton/TableBodySkeleton";
 import {PATH} from "../../constants/routePaths.enum";
-import {Navigate, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {RootStateType} from "../../app/store";
 import {charactersTableHead} from "../../constants/constants";
+import {CharacterDomainType} from "../../api/characters-api";
 
 
 
 export const CustomTable = () => {
 
-  const rows = useSelector<RootStateType, CharactersType[]>(state => state.allCharacters.characters)
+  const rows = useSelector<RootStateType, CharacterDomainType[]>(state => state.allCharacters.characters)
   const appStatus = useAppSelector<AppStatusType>(state => state.app.status)
   const navigate = useNavigate()
 
