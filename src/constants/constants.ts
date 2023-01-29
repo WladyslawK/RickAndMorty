@@ -6,3 +6,10 @@ export const speciesFilter = ['Human', 'Alien', 'Humanoid', 'Poopybutthole', 'My
 export const statusFilter = ['Alive', 'Dead', 'Unknown']
 
 export const CLICK_AWAY = 'clickaway'
+
+export enum APP_STATUS {
+  LOADING = 'loading',
+  IDLE = 'idle',
+  FAILED = 'failed'
+
+}

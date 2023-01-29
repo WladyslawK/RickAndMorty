@@ -12,9 +12,10 @@ import {TableBodySkeleton} from "components/tableBodySkeleton/TableBodySkeleton"
 //react-router-dom imports
 import {useNavigate} from "react-router-dom"
 
-//constants imports
+//constants vs utils function imports
 import {PATH} from "constants/routePaths.enum"
-import {charactersTableHead} from "constants/constants"
+import {APP_STATUS, charactersTableHead} from "constants/constants"
+import {capitalizeFirstLetter} from "utils/capitalizeFirstLeter"
 
 // types imports
 import {CharacterDomainType} from "api/characters-api"
@@ -38,39 +39,38 @@ export const CustomTable = () => {
   const head = charactersTableHead.map((item, i) => <TableCell key={i} align={i === 0 ? "left" : 'right'}><span
     className={s.table_head_item}>{item}</span></TableCell>)
 
-  const body = rows.map((row) => (
+  const body = rows.map(({name, status, species, url, id}) => (
     <TableRow
-      key={row.id}
+      key={id}
       sx={{'&:last-child td, &:last-child th': {border: 0}}}
     >
-      <TableCell component="th" scope="row">{row.name}</TableCell>
-      <TableCell align="right">{row.status}</TableCell>
-      <TableCell align="right">{row.species}</TableCell>
-      <TableCell style={{cursor: 'pointer'}} align="right" onClick={() => openCharacterInfoHandler(row.id)}>{row.url}</TableCell>
+      <TableCell component="th" scope="row">{name}</TableCell>
+      <TableCell align="right">{capitalizeFirstLetter(status)}</TableCell>
+      <TableCell align="right">{capitalizeFirstLetter(species)}</TableCell>
+      <TableCell style={{cursor: 'pointer', color: 'blue'}} align="right" onClick={() => openCharacterInfoHandler(id)}>{url}</TableCell>
     </TableRow>
   ))
 
-
   return (
     <div className={s.table_container}>
-      <TableContainer component={Paper}>
-        <Table sx={{minWidth: 650}} aria-label="simple table">
-          <TableHead>
-            <TableRow className={s.table_head}>
+          <TableContainer component={Paper}>
+            <Table sx={{minWidth: 650}} aria-label="simple table">
+              <TableHead>
+                <TableRow className={s.table_head}>
+                  {
+                    head
+                  }
+                </TableRow>
+              </TableHead>
               {
-                head
+                appStatus === APP_STATUS.LOADING ?
+                  <TableBodySkeleton columnsCount={4} rowsCount={20}/> :
+                  <TableBody>
+                    {body}
+                  </TableBody>
               }
-            </TableRow>
-          </TableHead>
-          {
-            appStatus === 'loading' ?
-              <TableBodySkeleton columnsCount={4} rowsCount={20}/> :
-              <TableBody>
-                {body}
-              </TableBody>
-          }
-        </Table>
-      </TableContainer>
+            </Table>
+          </TableContainer>
     </div>
   )
 }

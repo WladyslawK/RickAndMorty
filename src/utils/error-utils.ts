@@ -1,6 +1,12 @@
+//redux/toolkit import
 import {Dispatch} from "@reduxjs/toolkit"
-import {ErrorResponse} from "../api/characters-api"
-import {setAppErrorAC, setAppStatusAC} from "../app/appSlice"
+
+//type import
+import {ErrorResponse} from "api/characters-api"
+import {APP_STATUS} from "constants/constants"
+
+//action creators imports
+import {setAppErrorAC, setAppStatusAC} from "app/appSlice"
 
 export const handleServerAppError = (data: ErrorResponse, dispatch: Dispatch) => {
   if(data.response.data.error){
@@ -8,5 +14,5 @@ export const handleServerAppError = (data: ErrorResponse, dispatch: Dispatch) =>
   }else {
     dispatch(setAppErrorAC({error: 'some error'}))
   }
-  dispatch(setAppStatusAC({status: 'failed'}))
+  dispatch(setAppStatusAC({status: APP_STATUS.FAILED}))
 }

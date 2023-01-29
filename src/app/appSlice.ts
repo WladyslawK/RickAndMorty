@@ -1,7 +1,11 @@
+//redux/toolkit import
 import {createSlice, PayloadAction} from "@reduxjs/toolkit"
 
+//constants import
+import {APP_STATUS} from "constants/constants"
+
 const initialState: AppInitialState = {
-  status: 'loading',
+  status: APP_STATUS.LOADING,
   error: null
 }
 

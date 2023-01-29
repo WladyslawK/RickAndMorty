@@ -1,9 +1,10 @@
 //redux/toolkit import
 import {createSlice, Dispatch, PayloadAction} from "@reduxjs/toolkit"
 
-//api & type import
+//api & type & constants import
 import {characterApi} from "api/character-api"
 import {CharacterDomainType} from "api/characters-api"
+import {APP_STATUS} from "../../constants/constants"
 
 //action creator import
 import {setAppStatusAC} from "app/appSlice"
@@ -56,11 +57,11 @@ export const {setCharacterAC} = slice.actions
 // characterSlice thunks
 
 export const getCharacter = (id: string) => async (dispatch: Dispatch) => {
-  dispatch(setAppStatusAC({status: 'loading'}))
+  dispatch(setAppStatusAC({status: APP_STATUS.LOADING}))
   try {
     const response = await characterApi.getCharacter(id)
     dispatch(setCharacterAC({character: {...response.data}}))
-    dispatch(setAppStatusAC({status: 'idle'}))
+    dispatch(setAppStatusAC({status: APP_STATUS.IDLE}))
   }catch (error: any) {
     handleServerAppError(error, dispatch)
   }
