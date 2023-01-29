@@ -1,9 +1,7 @@
 import {FC} from 'react'
 
-import {Skeleton} from '@mui/material'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableRow from '@mui/material/TableRow'
+//mui imports
+import {Skeleton, TableBody, TableCell, TableRow} from '@mui/material'
 
 type TableSkeletonPropsType = {
   columnsCount: number

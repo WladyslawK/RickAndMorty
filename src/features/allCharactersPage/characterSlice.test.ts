@@ -1,4 +1,5 @@
-import {CharactersInitialStateType, charactersSlice, setCharactersAC, setQueryParamsAC} from "./charactersSlice"
+//types import
+import {CharactersInitialStateType, charactersSlice, setCharactersAC, setQueryParamsAC} from "features/allCharactersPage/charactersSlice"
 
 
 describe('Characters Slice tests', () => {

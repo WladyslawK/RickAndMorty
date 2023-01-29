@@ -1,8 +1,15 @@
+//@redux/toolkit imports
 import {AnyAction, createSlice, Dispatch, PayloadAction, ThunkDispatch} from "@reduxjs/toolkit"
-import {CharacterDomainType, charactersApi, updateQueryType} from "../../api/characters-api"
-import {RootStateType} from "../../app/store"
-import {setAppStatusAC} from "../../app/appSlice"
-import {handleServerAppError} from "../../utils/error-utils"
+
+//types imports
+import {CharacterDomainType, charactersApi, updateQueryType} from "api/characters-api"
+import {RootStateType} from "app/store"
+
+//action creator import
+import {setAppStatusAC} from "app/appSlice"
+
+//utils imports
+import {handleServerAppError} from "utils/error-utils"
 
 export const initialCharactersState: CharactersInitialStateType = {
   characters: [],

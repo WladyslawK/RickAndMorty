@@ -1,6 +1,8 @@
-import axios from "axios";
-import {instance} from "./instance";
-import {CharacterDomainType} from "./characters-api";
+//instance import
+import {instance} from "api/instance"
+
+//type import
+import {CharacterDomainType} from "api/characters-api"
 
 
 export const characterApi = {

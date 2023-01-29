@@ -1,5 +1,7 @@
-import {queryParamsType} from "../features/allCharactersPage/charactersSlice"
-import {instance} from "./instance"
+//type import
+import {queryParamsType} from "features/allCharactersPage/charactersSlice"
+//instance import
+import {instance} from "api/instance"
 
 export const charactersApi = {
   getCharacters: (data: updateQueryType) => {
@@ -19,7 +21,6 @@ type ResponseType<T = {}> = {
 export type ErrorResponse = {
   response: ResponseType<{error: string}>
 }
-
 
 export type CharactersResponseType = {
   info: {

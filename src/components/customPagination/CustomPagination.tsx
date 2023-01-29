@@ -1,9 +1,19 @@
-import { Pagination } from '@mui/material';
-import React, {ChangeEvent, useState} from 'react';
-import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-import {updateQueryParams} from "../../features/allCharactersPage/charactersSlice";
-import s from './CustomPagination.module.css'
-import {useSearchParams} from "react-router-dom";
+import React, {ChangeEvent} from 'react'
+
+//mui import
+import { Pagination } from '@mui/material'
+
+//hooks import
+import {useAppDispatch, useAppSelector} from "hooks/reduxHooks"
+
+//thunk import
+import {updateQueryParams} from "features/allCharactersPage/charactersSlice"
+
+//react-router-dom import
+import {useSearchParams} from "react-router-dom"
+
+//style import
+import s from 'components/customPagination/CustomPagination.module.css'
 
 export const CustomPagination = () => {
 

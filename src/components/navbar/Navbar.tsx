@@ -1,10 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import s from './Navbar.module.css'
-import menuIcon from '../../assets/icons/burger-bar.png'
-import closeIcon from '../../assets/icons/close.png'
-import logo from '../../assets/images/logo.jpg'
-import {Link, useNavigate} from "react-router-dom";
-import {PATH} from "../../constants/routePaths.enum";
+import React, {useState, useEffect} from 'react'
+
+//icons imports
+import menuIcon from 'assets/icons/burger-bar.png'
+import closeIcon from 'assets/icons/close.png'
+import logo from 'assets/images/logo.jpg'
+
+//react-router-dom import
+import {Link, useNavigate} from "react-router-dom"
+
+//constants import
+import {PATH} from "constants/routePaths.enum"
+
+//style import
+import s from 'components/navbar/Navbar.module.css'
 
 export const Navbar = () => {
   const [click, setClick] = useState(false);

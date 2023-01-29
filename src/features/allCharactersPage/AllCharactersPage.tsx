@@ -1,18 +1,14 @@
-import React, {useEffect} from 'react'
-import {CustomTable} from "../../components/customTable/CustomTable"
-import s from './AllCharactersPage.module.css'
-import {getCharacters} from "./charactersSlice"
-import {useAppDispatch} from "../../hooks/reduxHooks"
-import {CustomSearch} from "../../components/customSearch/CustomSearch"
-import {useLocation} from "react-router-dom";
-import {CustomPagination} from "../../components/customPagination/CustomPagination";
+import React from 'react'
+
+//components imports
+import {CustomTable} from "components/customTable/CustomTable"
+import {CustomSearch} from "components/customSearch/CustomSearch"
+import {CustomPagination} from "components/customPagination/CustomPagination"
+
+//style import
+import s from 'features/allCharactersPage/AllCharactersPage.module.css'
 
 export const AllCharactersPage = () => {
-
-  const dispatch = useAppDispatch()
-  const location = useLocation()
-
-
 
   return (
     <main className={s.main}>

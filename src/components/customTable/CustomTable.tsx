@@ -1,27 +1,33 @@
 import React from 'react'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
-import s from './CustomTable.module.css'
-import {useAppSelector} from "../../hooks/reduxHooks";
-import {AppStatusType} from "../../app/appSlice";
-import {TableBodySkeleton} from "../tableBodySkeleton/TableBodySkeleton";
-import {PATH} from "../../constants/routePaths.enum";
-import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {RootStateType} from "../../app/store";
-import {charactersTableHead} from "../../constants/constants";
-import {CharacterDomainType} from "../../api/characters-api";
+
+//mui imports
+import {Table, TableBody, TableCell, TableContainer, TableHead, Paper, TableRow} from '@mui/material'
+
+//hooks import
+import {useAppSelector} from "hooks/reduxHooks"
+
+//skeleton import
+import {TableBodySkeleton} from "components/tableBodySkeleton/TableBodySkeleton"
+
+//react-router-dom imports
+import {useNavigate} from "react-router-dom"
+
+//constants imports
+import {PATH} from "constants/routePaths.enum"
+import {charactersTableHead} from "constants/constants"
+
+// types imports
+import {CharacterDomainType} from "api/characters-api"
+import {AppStatusType} from "app/appSlice"
+
+//styles import
+import s from 'components/customTable/CustomTable.module.css'
 
 
 
 export const CustomTable = () => {
 
-  const rows = useSelector<RootStateType, CharacterDomainType[]>(state => state.allCharacters.characters)
+  const rows = useAppSelector<CharacterDomainType[]>(state => state.allCharacters.characters)
   const appStatus = useAppSelector<AppStatusType>(state => state.app.status)
   const navigate = useNavigate()
 

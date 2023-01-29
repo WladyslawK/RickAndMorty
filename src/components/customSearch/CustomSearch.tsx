@@ -1,22 +1,32 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useState} from 'react'
+
+//mui imports
 import {
   FormControl,
   IconButton,
-  InputAdornment, InputLabel,
+  InputAdornment,
+  InputLabel,
   MenuItem,
   OutlinedInput,
   Select,
   SelectChangeEvent
 } from "@mui/material"
-import s from './CustomSerch.module.css'
 import {FilterAltOff, Search} from "@mui/icons-material"
-import {speciesFilter, statusFilter} from "../../constants/constants"
-import {useAppDispatch} from "../../hooks/reduxHooks"
-import {
-  initialCharactersState,
-  updateQueryParams
-} from "../../features/allCharactersPage/charactersSlice"
+
+//constants import
+import {speciesFilter, statusFilter} from "constants/constants"
+
+//hooks import
+import {useAppDispatch} from "hooks/reduxHooks"
+
+//thunk & initialState import
+import {initialCharactersState, updateQueryParams} from "features/allCharactersPage/charactersSlice"
+
+//react-router-dom import
 import {useSearchParams} from "react-router-dom"
+
+//styles import
+import s from 'components/customSearch/CustomSerch.module.css'
 
 export const CustomSearch = () => {
 
@@ -26,7 +36,6 @@ export const CustomSearch = () => {
   const queryName = searchParams.get('name')
   let timer: number
   const dispatch = useAppDispatch()
-  const inputRef: any = useRef(queryName ? queryName : '')
   const [name, setName] = useState(queryName ? queryName : '')
   const [status, setStatus] = useState(queryStatus ? queryStatus : '')
   const [species, setSpecies] = useState(querySpecies ? querySpecies : '')
@@ -63,7 +72,7 @@ export const CustomSearch = () => {
     }
 
     //debounce delay to change the query params
-    timer = window.setTimeout(()=> {
+    timer = window.setTimeout(() => {
       dispatch(updateQueryParams({page: '1', name, status, species}))
     }, 400)
 
@@ -110,7 +119,6 @@ export const CustomSearch = () => {
             }
             onChange={(e) => changeSearchInputHandler(e.currentTarget.value)}
             value={name}
-            ref={inputRef}
           />
         </FormControl>
 

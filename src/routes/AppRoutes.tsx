@@ -1,8 +1,15 @@
-import React from 'react';
-import {Navigate, Route, Routes} from "react-router-dom";
-import {PATH} from "../constants/routePaths.enum";
-import {AllCharactersPage} from "../features/allCharactersPage/AllCharactersPage";
-import {CharacterInformation} from "../features/characterInformation/CharacterInformation";
+import React from 'react'
+
+//react-router-dom imports
+import {Navigate, Route, Routes} from "react-router-dom"
+
+//constants import
+import {PATH} from "constants/routePaths.enum"
+
+//components imports
+import {AllCharactersPage} from "features/allCharactersPage/AllCharactersPage"
+import {CharacterInformation} from "features/characterInformation/CharacterInformation"
+
 
 export const AppRoutes = () => {
   return (

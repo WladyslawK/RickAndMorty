@@ -1,8 +1,16 @@
-import {createSlice, Dispatch, PayloadAction} from "@reduxjs/toolkit";
-import {characterApi} from "../../api/character-api";
-import {CharacterDomainType} from "../../api/characters-api";
-import {setAppStatusAC} from "../../app/appSlice";
-import {handleServerAppError} from "../../utils/error-utils";
+//redux/toolkit import
+import {createSlice, Dispatch, PayloadAction} from "@reduxjs/toolkit"
+
+//api & type import
+import {characterApi} from "api/character-api"
+import {CharacterDomainType} from "api/characters-api"
+
+//action creator import
+import {setAppStatusAC} from "app/appSlice"
+
+//utils function import
+import {handleServerAppError} from "utils/error-utils"
+
 
 const characterInitialState: CharacterInitialStateType = {
   character: {

@@ -1,6 +1,10 @@
 import React from 'react'
+
+//mui imports
 import {Skeleton} from "@mui/material"
-import s from './CharacterInfoSkeleton.module.css'
+
+//style import
+import s from 'components/characterInfoSkeleton/CharacterInfoSkeleton.module.css'
 
 export const CharacterInfoSkeleton = () => {
   return (

@@ -1,4 +1,4 @@
-import {AppInitialState, appSlice, setAppErrorAC, setAppStatusAC} from "./appSlice";
+import {AppInitialState, appSlice, setAppErrorAC, setAppStatusAC} from "app/appSlice";
 
 describe('App Slice tests', () => {
   let initialState: AppInitialState

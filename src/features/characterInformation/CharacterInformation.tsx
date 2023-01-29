@@ -1,12 +1,27 @@
 import React, {useEffect, useState} from 'react'
-import s from './Charactersinformation.module.css'
-import {useLocation, useParams} from "react-router-dom";
-import {Button, CircularProgress, Skeleton} from "@mui/material";
-import {CharacterDomainType} from "../../api/characters-api";
-import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-import {getCharacter} from "./characterSlice";
-import {AppStatusType} from "../../app/appSlice";
-import {CharacterInfoSkeleton} from "../../components/characterInfoSkeleton/CharacterInfoSkeleton";
+
+//react-router-dom imports
+import {useParams} from "react-router-dom"
+
+//mui imports
+import {Button} from "@mui/material"
+
+//types imports
+import {CharacterDomainType} from "api/characters-api"
+import {AppStatusType} from "app/appSlice"
+
+//hooks imports
+import {useAppDispatch, useAppSelector} from "hooks/reduxHooks"
+
+//thunk import
+import {getCharacter} from "features/characterInformation/characterSlice"
+
+//components import
+import {CharacterInfoSkeleton} from "components/characterInfoSkeleton/CharacterInfoSkeleton"
+
+//style import
+import s from 'features/characterInformation/Charactersinformation.module.css'
+
 
 export const CharacterInformation = () => {
 
