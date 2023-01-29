@@ -103,7 +103,7 @@ export const CustomSearch = () => {
   return (
     <div className={s.mainContainer}>
       <div className={s.searchContainer}>
-        <FormControl sx={{width: '25ch'}} className={s.nameInput} variant="outlined" size='small'>
+        <FormControl style={window.innerWidth <= 960 ? {margin: '10px 0'}: {}} className={s.nameInput} variant="outlined" size='small'>
           <OutlinedInput
             id="outlined-adornment-password"
             type='text'
@@ -122,7 +122,7 @@ export const CustomSearch = () => {
           />
         </FormControl>
 
-        <FormControl className={s.statusInput}>
+        <FormControl style={window.innerWidth <= 960 ? {margin: '10px 0'}: {}} className={s.statusInput}>
           <InputLabel id="demo-simple-select-label">Status</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -141,7 +141,7 @@ export const CustomSearch = () => {
           </Select>
         </FormControl>
 
-        <FormControl className={s.speciesInput}>
+        <FormControl style={window.innerWidth <= 960 ? {margin: '10px 0'}: {}} className={s.speciesInput}>
           <InputLabel id="demo-simple-select-label">Species</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -161,7 +161,7 @@ export const CustomSearch = () => {
         </FormControl>
 
 
-        <div className={s.resetAllFilters} onClick={resetAllFiltersHandler}>
+        <div style={window.innerWidth <= 960 ? {margin: '10px 0'}: {}} className={s.resetAllFilters} onClick={resetAllFiltersHandler}>
           <FilterAltOff/>
         </div>
       </div>
