@@ -1,10 +1,20 @@
 import React from 'react'
+
+//hooks imports
 import {useAppSelector} from "hooks/reduxHooks"
+
+//type imports
 import {CharacterDomainType} from "api/characters-api"
-import s from 'components/customTable/mobileViewTableCells/MobileViewTableCells.module.css'
+
+//constants & util function import
 import {capitalizeFirstLetter} from "utils/capitalizeFirstLeter"
 import {PATH} from "constants/routePaths.enum"
+
+//react-router-dom import
 import {useNavigate} from "react-router-dom"
+
+//style import
+import s from 'components/customTable/mobileViewTableCells/MobileViewTableCells.module.css'
 
 export const MobileViewTableCells = () => {
 
