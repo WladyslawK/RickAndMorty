@@ -1,7 +1,8 @@
-import {AnyAction, createSlice, Dispatch, PayloadAction, ThunkDispatch} from "@reduxjs/toolkit";
-import {CharacterDomainType, charactersApi, updateQueryType} from "../../api/characters-api";
-import {RootStateType} from "../../app/store";
-import {setAppStatusAC} from "../../app/appSlice";
+import {AnyAction, createSlice, Dispatch, PayloadAction, ThunkDispatch} from "@reduxjs/toolkit"
+import {CharacterDomainType, charactersApi, updateQueryType} from "../../api/characters-api"
+import {RootStateType} from "../../app/store"
+import {setAppStatusAC} from "../../app/appSlice"
+import {handleServerAppError} from "../../utils/error-utils"
 
 export const initialCharactersState: CharactersInitialStateType = {
   characters: [],
@@ -22,7 +23,7 @@ const slice = createSlice({
       state.characters = action.payload.characters
       state.pages = action.payload.pages
     },
-    setQueryParamsAC: (state, action: PayloadAction<{queryParams: queryParamsType}>) => {
+    setQueryParamsAC: (state, action: PayloadAction<{ queryParams: queryParamsType }>) => {
       state.queryParams = action.payload.queryParams
     }
   }
@@ -36,37 +37,35 @@ export const {setCharactersAC, setQueryParamsAC} = slice.actions
 
 //characters thunks
 
-export const getCharacters = () => async (dispatch: Dispatch, getState:() => RootStateType ) => {
+export const getCharacters = () => async (dispatch: Dispatch, getState: () => RootStateType) => {
   dispatch(setAppStatusAC({status: 'loading'}))
+  const data = getState().allCharacters.queryParams
   try {
-    const data = getState().allCharacters.queryParams;
+
     const response = await charactersApi.getCharacters(data)
 
-      const characters = response.data.results
-      const pages = response.data.info.pages
-      dispatch(setCharactersAC({characters, pages}))
-      dispatch(setAppStatusAC({status: 'idle'}))
-  } catch (error) {
+    const characters = response.data.results
+    const pages = response.data.info.pages
+    dispatch(setCharactersAC({characters, pages}))
+    dispatch(setAppStatusAC({status: 'idle'}))
+  } catch (error: any) {
+    handleServerAppError(error, dispatch)
   }
 }
 
-export const updateQueryParams = (data: updateQueryType) => async (dispatch: ThunkDispatch<RootStateType, any, AnyAction>, getState:() => RootStateType) => {
+export const updateQueryParams = (data: updateQueryType) => async (dispatch: ThunkDispatch<RootStateType, any, AnyAction>, getState: () => RootStateType) => {
 
   dispatch(setAppStatusAC({status: 'loading'}))
   const queryParams = getState().allCharacters.queryParams
   const updateParams = {...queryParams, ...data}
 
   dispatch(setQueryParamsAC({queryParams: updateParams}))
-  try {
-    const response = await dispatch(getCharacters())
-  }catch (e){
-    console.log(e)
-  }
-
+  dispatch(setAppStatusAC({status: 'idle'}))
+  await dispatch(getCharacters())
 }
 
 
-type CharactersInitialStateType = {
+export type CharactersInitialStateType = {
   characters: CharacterDomainType[]
   queryParams: queryParamsType
   pages: string

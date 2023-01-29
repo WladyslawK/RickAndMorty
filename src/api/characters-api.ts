@@ -1,12 +1,25 @@
-import axios from "axios";
-import {queryParamsType} from "../features/allCharactersPage/charactersSlice";
-import {instance} from "./instance";
+import {queryParamsType} from "../features/allCharactersPage/charactersSlice"
+import {instance} from "./instance"
 
 export const charactersApi = {
   getCharacters: (data: updateQueryType) => {
     return instance.get<CharactersResponseType>('', {params: data})
   }
 }
+
+type ResponseType<T = {}> = {
+  config: {}
+  data: T
+  headers: {}
+  request: {}
+  status: number
+  statusText: string
+}
+
+export type ErrorResponse = {
+  response: ResponseType<{error: string}>
+}
+
 
 export type CharactersResponseType = {
   info: {

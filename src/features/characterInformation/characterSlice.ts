@@ -2,6 +2,7 @@ import {createSlice, Dispatch, PayloadAction} from "@reduxjs/toolkit";
 import {characterApi} from "../../api/character-api";
 import {CharacterDomainType} from "../../api/characters-api";
 import {setAppStatusAC} from "../../app/appSlice";
+import {handleServerAppError} from "../../utils/error-utils";
 
 const characterInitialState: CharacterInitialStateType = {
   character: {
@@ -26,7 +27,7 @@ const characterInitialState: CharacterInitialStateType = {
   }
 }
 
-type CharacterInitialStateType = {
+export type CharacterInitialStateType = {
   character: CharacterDomainType,
 }
 
@@ -52,7 +53,7 @@ export const getCharacter = (id: string) => async (dispatch: Dispatch) => {
     const response = await characterApi.getCharacter(id)
     dispatch(setCharacterAC({character: {...response.data}}))
     dispatch(setAppStatusAC({status: 'idle'}))
-  }catch (e) {
-    console.log(e)
+  }catch (error: any) {
+    handleServerAppError(error, dispatch)
   }
 }
