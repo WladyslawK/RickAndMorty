@@ -122,14 +122,13 @@ export const CustomSearch = () => {
           />
         </FormControl>
 
-        <FormControl>
+        <FormControl className={s.statusInput}>
           <InputLabel id="demo-simple-select-label">Status</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             name={'status'}
             label="status"
-            className={s.statusInput}
             onChange={changeStatusHandler}
             value={status}
             size='small'
@@ -142,14 +141,13 @@ export const CustomSearch = () => {
           </Select>
         </FormControl>
 
-        <FormControl>
+        <FormControl className={s.speciesInput}>
           <InputLabel id="demo-simple-select-label">Species</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             name={'species'}
             label="species"
-            className={s.speciesInput}
             onChange={changeSpeciesHandler}
             value={species}
             size='small'

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
 //mui imports
 import {Table, TableBody, TableCell, TableContainer, TableHead, Paper, TableRow} from '@mui/material'
@@ -6,8 +6,9 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, Paper, TableRow}
 //hooks import
 import {useAppSelector} from "hooks/reduxHooks"
 
-//skeleton import
+//components import
 import {TableBodySkeleton} from "components/tableBodySkeleton/TableBodySkeleton"
+import {MobileViewTableCells} from "components/customTable/mobileViewTableCells/MobileViewTableCells"
 
 //react-router-dom imports
 import {useNavigate} from "react-router-dom"
@@ -32,6 +33,21 @@ export const CustomTable = () => {
   const appStatus = useAppSelector<AppStatusType>(state => state.app.status)
   const navigate = useNavigate()
 
+  const [mobileView, setMobileView] = useState(false)
+
+  const showButton = () => {
+    if (window.innerWidth <= 960) {
+      setMobileView(true)
+    } else {
+      setMobileView(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', showButton);
+    showButton();
+  }, []);
+
   const openCharacterInfoHandler = (id: number) => {
     navigate(`${PATH.CHARACTER_INFO}/${id}`)
   }
@@ -47,30 +63,37 @@ export const CustomTable = () => {
       <TableCell component="th" scope="row">{name}</TableCell>
       <TableCell align="right">{capitalizeFirstLetter(status)}</TableCell>
       <TableCell align="right">{capitalizeFirstLetter(species)}</TableCell>
-      <TableCell style={{cursor: 'pointer', color: 'blue'}} align="right" onClick={() => openCharacterInfoHandler(id)}>{url}</TableCell>
+      <TableCell style={{cursor: 'pointer', color: 'blue'}} align="right"
+                 onClick={() => openCharacterInfoHandler(id)}><span className={s.characterLink}>{url}</span></TableCell>
     </TableRow>
   ))
 
   return (
-    <div className={s.table_container}>
-          <TableContainer component={Paper}>
-            <Table sx={{minWidth: 650}} aria-label="simple table">
-              <TableHead>
-                <TableRow className={s.table_head}>
-                  {
-                    head
-                  }
-                </TableRow>
-              </TableHead>
-              {
-                appStatus === APP_STATUS.LOADING ?
-                  <TableBodySkeleton columnsCount={4} rowsCount={20}/> :
-                  <TableBody>
-                    {body}
-                  </TableBody>
-              }
-            </Table>
-          </TableContainer>
-    </div>
+    <>
+      {
+        mobileView ?
+          <MobileViewTableCells/> :
+          <div className={s.table_container}>
+            <TableContainer component={Paper}>
+              <Table sx={{minWidth: 650}} aria-label="simple table">
+                <TableHead>
+                  <TableRow className={s.table_head}>
+                    {
+                      head
+                    }
+                  </TableRow>
+                </TableHead>
+                {
+                  appStatus === APP_STATUS.LOADING ?
+                    <TableBodySkeleton columnsCount={4} rowsCount={20}/> :
+                    <TableBody>
+                      {body}
+                    </TableBody>
+                }
+              </Table>
+            </TableContainer>
+          </div>
+      }
+    </>
   )
 }

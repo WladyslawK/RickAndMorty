@@ -6,9 +6,10 @@ import {useParams} from "react-router-dom"
 //mui imports
 import {Button} from "@mui/material"
 
-//types imports
+//types & constants imports
 import {CharacterDomainType} from "api/characters-api"
 import {AppStatusType} from "app/appSlice"
+import {APP_STATUS} from "constants/constants"
 
 //hooks imports
 import {useAppDispatch, useAppSelector} from "hooks/reduxHooks"
@@ -21,6 +22,7 @@ import {CharacterInfoSkeleton} from "components/characterInfoSkeleton/CharacterI
 
 //style import
 import s from 'features/characterInformation/Charactersinformation.module.css'
+
 
 
 export const CharacterInformation = () => {
@@ -42,7 +44,7 @@ export const CharacterInformation = () => {
   return (
     <>
       {
-        appStatus === 'loading' ?
+        appStatus === APP_STATUS.LOADING ?
           <CharacterInfoSkeleton /> :
           <section className={s.mainContainer}>
             <div className={s.characterMainBlock}>

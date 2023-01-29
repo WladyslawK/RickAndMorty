@@ -47,3 +47,15 @@
 .resetAllFilters:hover{
     border-color: black;
 }
+
+@media screen and (max-width: 960px) {
+    .searchContainer{
+        flex-direction: column;
+        align-items: center;
+    }
+    .nameInput, .statusInput, .speciesInput, .resetAllFilters{
+        width: 100%;
+        margin: 10px 0;
+    }
+
+}

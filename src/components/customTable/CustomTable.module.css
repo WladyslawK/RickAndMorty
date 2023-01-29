@@ -19,3 +19,12 @@
 s.characterUrl{
     cursor: pointer;
 }
+
+.characterLink{
+    color: blue;
+    text-decoration: none;
+}
+
+.characterLink:hover{
+    color: black;
+}

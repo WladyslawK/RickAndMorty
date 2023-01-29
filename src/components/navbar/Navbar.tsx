@@ -15,25 +15,25 @@ import {PATH} from "constants/routePaths.enum"
 import s from 'components/navbar/Navbar.module.css'
 
 export const Navbar = () => {
-  const [click, setClick] = useState(false);
-  const [iconMenu, setIconMenu] = useState(true);
+  const [click, setClick] = useState(false)
+  const [iconMenu, setIconMenu] = useState(true)
   const navigate = useNavigate()
 
   const handleClick = () => {
     setClick(!click);
   }
-  const closeMobileMenu = () => setClick(false);
+  const closeMobileMenu = () => setClick(false)
 
   const showButton = () => {
     if (window.innerWidth <= 960) {
-      setIconMenu(false);
+      setIconMenu(false)
     } else {
-      setIconMenu(true);
+      setIconMenu(true)
     }
   }
 
   useEffect(() => {
-    window.addEventListener('resize', showButton);
+    window.addEventListener('resize', showButton)
     showButton();
   }, []);
 
@@ -52,7 +52,7 @@ export const Navbar = () => {
           <h2 className={s.logo} onClick={toMainPageHandler}>Rick & Morris</h2>
           <nav>
             <ul className={click ? `${s.navMenu} ${s.navMenuActive}` : s.navMenu}>
-              <li onClick={closeMobileMenu} className={s.navItem}><Link to={PATH.ALL_CHARACTERS}>All characters</Link></li>
+              <li onClick={closeMobileMenu} className={s.navItem}><Link className={s.navLink} to={PATH.ALL_CHARACTERS}>All characters</Link></li>
             </ul>
           </nav>
 
